@@ -1,0 +1,9 @@
+.catalog-main__container {
+  display: flex;
+  flex-direction: row;
+	padding: 144px 40px;
+}
+
+.catalog-main__filters {
+	width: 193px;
+}
