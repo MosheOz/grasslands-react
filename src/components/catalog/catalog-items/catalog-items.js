@@ -112,7 +112,8 @@ function CatalogItems(props) {
     <div>
       <div className="catalog-items__container">
         {data.search.items.map((item, i) => {
-          const price = item.priceWithTax.min || (item.priceWithTax.value / 100).toFixed(2);
+          const price =
+            item.priceWithTax.min || (item.priceWithTax.value / 100).toFixed(2);
           return (
             <ItemCard
               key={i}
@@ -121,7 +122,7 @@ function CatalogItems(props) {
               description={item.productName}
               weight={item.productVariantPriceMeasurement}
               price={price}
-							currencyCode={item.currencyCode}
+              currencyCode={item.currencyCode}
             />
           );
         })}

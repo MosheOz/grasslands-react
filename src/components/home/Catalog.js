@@ -1,15 +1,14 @@
 import React from "react";
 // eslint-disable-next-line
 import CatalogMain from "../catalog/catalog-main/catalog-main";
-import Header from "../header/Header";
+import "./Catalog.css";
 
-function Main() {
+function Catalog() {
   return (
-    <main>
-      
+    <main className="main">
       <CatalogMain />
     </main>
   );
 }
 
-export default Main;
+export default Catalog;
