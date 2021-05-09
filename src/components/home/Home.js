@@ -6,7 +6,7 @@ import Header from "../header/Header";
 function Main() {
   return (
     <main>
-      <Header />
+      
       <CatalogMain />
     </main>
   );

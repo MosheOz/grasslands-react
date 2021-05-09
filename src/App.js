@@ -8,9 +8,6 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
 import Catalog from './components/catalog/catalog-main/catalog-main';
 
-//test
-import PageA from './components/TestPages/PageA';
-import PageB from './components/TestPages/PageB';
 
 
 const client = new ApolloClient({
