@@ -2,7 +2,7 @@ import React from "react";
 import "./catalog-filters.css";
 import Checkbox from "../../common/checkbox/checkbox";
 
-function CatalogFilters() {
+function CatalogFilters(_) {
   return (
     <div className="catalog-filters">
       <div className="h4-medium catalog-filters__title">Filters</div>
