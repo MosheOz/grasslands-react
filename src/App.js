@@ -1,9 +1,12 @@
 import React from "react";
 // eslint-disable-next-line
+import Header from "./components/header/Header";
 import Main from "./components/home/Home";
 import Footer from "./components/footer/footer";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
+
+import "./App.css";
 
 const client = new ApolloClient({
   uri: "http://licensee-1.api.grasslandsmarkets.com/shop-api",
@@ -13,8 +16,8 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div>
-        {/* <Header /> */}
+      <div className="app">
+        <Header />
         <Main />
         <Footer />
       </div>

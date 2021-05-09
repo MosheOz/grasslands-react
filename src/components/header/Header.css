@@ -1,10 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Assistant&display=swap");
 .header {
-  position: absolute;
-  min-width: 940px;
   display: flex;
   margin: 32px 40px 0px 40px;
   align-items: center;
+  justify-content: center;
 }
 
 .header__logo {
