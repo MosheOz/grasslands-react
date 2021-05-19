@@ -2,13 +2,26 @@ import React from "react";
 import "./Item.css";
 import Heart from "../common/svg/heart/heart";
 import ItemCard from "../common/item-card/item-card";
+import { useQuery } from "@apollo/client";
+import { GET_PRODUCT } from "../../queries/queries";
 
 function Item(props) {
+
+  let productId = props.location.state.item;
+  const { loading, error, data } = useQuery(GET_PRODUCT, {
+    variables: { productId },
+  });
+
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+
+  console.log(data);
+
   return (
     <div className="item">
       <div className="item__image-container">
         <div className="item__image-container--image">
-          <img src="/images/image12.png" alt="''"></img>
+          <img src={data?.product?.featuredAsset?.preview} alt="''"></img>
         </div>
         <div className="item__image-container--image-gallery"></div>
       </div>
@@ -16,9 +29,9 @@ function Item(props) {
       <div className="item__details">
         <div className="item__details__info">
           <span className="item__details__info__supplier h7-regular">
-            Kim & Jake’s Fruits
+            {data?.product?.merchant?.name}
           </span>
-          <span className="item__details__info__title h2">Mixed Berries</span>
+          <span className="item__details__info__title h2">{data?.product?.slug}</span>
           <span className="item__details__info__weight h5-regular">
             per 1 lb
           </span>

@@ -98,7 +98,7 @@ import { GET_ITEMS } from "../../../queries/queries";
 // ];
 
 function CatalogItems(props) {
-  const { collectionId, take, skip } = props;
+  const { collectionId, take, skip, showItem } = props;
   const { loading, error, data } = useQuery(GET_ITEMS, {
     variables: {
       collectionId: collectionId,
@@ -112,10 +112,11 @@ function CatalogItems(props) {
     <div>
       <div className="catalog-items__container">
         {data.search.items.map((item, i) => {
+         //console.log(item)
           const price =
             item.priceWithTax.min || (item.priceWithTax.value / 100).toFixed(2);
           return (
-            <ItemCard
+            <ItemCard 
               key={i}
               title={item.productName}
               img={item.productAsset.preview}
@@ -123,6 +124,7 @@ function CatalogItems(props) {
               weight={item.productVariantPriceMeasurement}
               price={price}
               currencyCode={item.currencyCode}
+              showItem = {() => {showItem(item.productId)}}
             />
           );
         })}
