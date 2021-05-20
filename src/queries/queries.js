@@ -1,8 +1,7 @@
 import { gql } from "@apollo/client";
 
-
 const GET_ITEMS = gql`
-  query($collectionId: ID!, $take: Int!, $skip: Int!) {
+  query ($collectionId: ID!, $take: Int!, $skip: Int!) {
     search(input: { collectionId: $collectionId, take: $take, skip: $skip }) {
       items {
         productName
@@ -30,26 +29,25 @@ const GET_ITEMS = gql`
 `;
 
 const GET_COLLECTIONS = gql`
-query Getcollections {
-  collections {
-    items {
-      id
-      name
+  query Getcollections {
+    collections {
+      items {
+        id
+        name
+      }
     }
   }
-}
 `;
-
 
 const GET_PRODUCT = gql`
   query prduct($productId: ID!) {
     product(id: $productId) {
       slug
       id
-      merchant{
+      merchant {
         name
       }
-      featuredAsset{
+      featuredAsset {
         type
         preview
         source
@@ -61,4 +59,27 @@ const GET_PRODUCT = gql`
   }
 `;
 
-export { GET_ITEMS, GET_COLLECTIONS, GET_PRODUCT };
+const GET_FILTERS_PARAMS = gql`
+  query {
+    search(input: { take: 1000, skip: 0 }) {
+      totalItems
+
+      facetValues {
+        count
+        facetValue {
+          id
+          name
+          facet {
+            id
+            name
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+    }
+  }
+`;
+
+export { GET_ITEMS, GET_COLLECTIONS, GET_PRODUCT, GET_FILTERS_PARAMS };
