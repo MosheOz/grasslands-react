@@ -7,6 +7,8 @@ import { GET_PRODUCT } from "../../queries/queries";
 
 function Item(props) {
 
+	window.scrollTo(0, 0);
+
   let productId = props.location.state.item;
   const { loading, error, data } = useQuery(GET_PRODUCT, {
     variables: { productId },
@@ -21,7 +23,7 @@ function Item(props) {
     <div className="item">
       <div className="item__image-container">
         <div className="item__image-container--image">
-          <img src={data?.product?.featuredAsset?.preview} alt="''"></img>
+          <img className="item__image-container--img" src={data?.product?.featuredAsset?.preview} alt="''"></img>
         </div>
         <div className="item__image-container--image-gallery"></div>
       </div>
