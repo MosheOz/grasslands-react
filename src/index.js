@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { ApolloProvider } from "react-apollo";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-boost";
+import { createHttpLink } from "apollo-link-http";
+
 
 const httpLink = createHttpLink({
   uri: "http://licensee-1.api.grasslandsmarkets.com/shop-api",
@@ -16,8 +18,8 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({
   link: httpLink,
   cache,
-  typeDefs,
-  resolvers,
+  // typeDefs,
+  // resolvers,
 });
 
 client.writeData({
