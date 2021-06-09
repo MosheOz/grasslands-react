@@ -4,6 +4,43 @@ import "./catalog-items.css";
 import { useQuery } from "@apollo/client";
 import { GET_ITEMS } from "../../../queries/queries";
 
+
+function CatalogItems(props) {
+	const { collectionId, take, skip } = props;
+  const { loading, error, data } = useQuery(GET_ITEMS, {
+		variables: {
+			collectionId: collectionId,
+      take: take,
+      skip: skip,
+    },
+  });
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :</p>;
+  return (
+    <div>
+      <div className="catalog-items__container">
+        {data.search.items.map((item, i) => {
+					const price =
+					item.priceWithTax.min || (item.priceWithTax.value / 100).toFixed(2);
+          return (
+						<ItemCard
+						key={i}
+						title={item.productName}
+						img={item.productAsset.preview}
+						description={item.productName}
+						weight={item.productVariantPriceMeasurement}
+						price={price}
+						currencyCode={item.currencyCode}
+            />
+						);
+					})}
+      </div>
+    </div>
+  );
+}
+
+export default CatalogItems;
+
 // const produceData = [
 //   {
 //     title: "Kim & Jake’s Fruits",
@@ -96,39 +133,3 @@ import { GET_ITEMS } from "../../../queries/queries";
 //     price: "$36.99.69",
 //   },
 // ];
-
-function CatalogItems(props) {
-  const { collectionId, take, skip } = props;
-  const { loading, error, data } = useQuery(GET_ITEMS, {
-    variables: {
-      collectionId: collectionId,
-      take: take,
-      skip: skip,
-    },
-  });
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :</p>;
-  return (
-    <div>
-      <div className="catalog-items__container">
-        {data.search.items.map((item, i) => {
-          const price =
-            item.priceWithTax.min || (item.priceWithTax.value / 100).toFixed(2);
-          return (
-            <ItemCard
-              key={i}
-              title={item.productName}
-              img={item.productAsset.preview}
-              description={item.productName}
-              weight={item.productVariantPriceMeasurement}
-              price={price}
-              currencyCode={item.currencyCode}
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-export default CatalogItems;

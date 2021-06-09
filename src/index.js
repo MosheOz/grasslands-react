@@ -3,43 +3,34 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-// import { ApolloClient, InMemoryCache } from "@apollo/client";
-// import { gql } from "@apollo/client";
+import { ApolloProvider } from "react-apollo";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloClient } from "apollo-boost";
 
-// const client = new ApolloClient({
-//   uri: "http://licensee-1.api.grasslandsmarkets.com/shop-api",
-//   cache: new InMemoryCache(),
-// });
+const httpLink = createHttpLink({
+  uri: "http://licensee-1.api.grasslandsmarkets.com/shop-api",
+});
 
-// client
-//   .query({
-//     query: gql`
-//       query {
-//         search(
-//           input: {
-//             collectionId: "2"
-//             facetValueIds: []
-//             groupByProduct: true
-//             skip: 0
-//             take: 24
-//             term: ""
-//           }
-//         ) {
-//           items {
-//             productName
-//             productAsset {
-//               preview
-//             }
-//           }
-//         }
-//       }
-//     `,
-//   })
-//   .then((result) => console.log(result));
+const cache = new InMemoryCache();
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache,
+  typeDefs,
+  resolvers,
+});
+
+client.writeData({
+  data: {
+    catalogItems: [],
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
