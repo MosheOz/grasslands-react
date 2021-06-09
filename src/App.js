@@ -12,7 +12,7 @@ import PageA from "./components/TestPages/PageA";
 import PageB from "./components/TestPages/PageB";
 
 import "./App.css";
-import Footer from "./components/footer/Footer";
+import Footer from "./components/Footer/Footer";
 
 const client = new ApolloClient({
   uri: "http://licensee-1.api.grasslandsmarkets.com/shop-api",

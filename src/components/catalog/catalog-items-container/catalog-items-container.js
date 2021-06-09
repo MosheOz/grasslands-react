@@ -1,15 +1,32 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import CatalogItems from "../catalog-items/catalog-items";
+import { useQuery } from "@apollo/client";
+import { GET_COLLECTIONS } from "../../../queries/queries";
+
 
 function CatalogItemsContainer() {
+
+  let history = useHistory();
+  
+  const showItem = (x) => {
+    history.push("/item", { item: x });
+  }
+  const { loading, error, data } = useQuery(GET_COLLECTIONS);
+
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+
+
+
   return (
     <div>
-      <h3 className="ml-24 h3">Produce</h3>
-      <CatalogItems key={1} collectionId={2} take={4} skip={0} />
-      <h3 className="ml-24 h3">Dairy & Eggs</h3>
-      <CatalogItems key={2} collectionId={8} take={4} skip={0} />
-      <h3 className="ml-24 h3">Vegetables</h3>
-      <CatalogItems key={3} collectionId={5} take={4} skip={0} />
+      {data.collections.items.map((collection) => {
+        return <div>
+          <h3 className="ml-24 h3">{collection.name}</h3>
+          <CatalogItems key={collection.name} collectionId={collection.id} take={4} skip={0} showItem={showItem} />
+        </div>
+      })}
     </div>
   );
 }
