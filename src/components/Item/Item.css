@@ -7,6 +7,13 @@
 
 .item__image-container--image {
   width: 543px;
+	height: 543px;
+	max-width: 543px;
+	max-height: 543px;
+}
+
+.item__image-container--img {
+	width: 100%;
 }
 
 .item__details__info {

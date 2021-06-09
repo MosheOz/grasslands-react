@@ -1,6 +1,9 @@
 import React from "react";
 import "./catalog-filters.css";
 import Checkbox from "../../common/checkbox/checkbox";
+import { useQuery } from "@apollo/client";
+import { GET_FILTERS_PARAMS } from "../../../queries/queries";
+const _ = require('lodash');
 
 function CatalogFilters() {
   return (

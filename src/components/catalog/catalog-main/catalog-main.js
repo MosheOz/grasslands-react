@@ -10,7 +10,7 @@ function CatalogMain() {
         <CatalogFilters />
       </div>
       <div className="catalog-main__items">
-        <CatalogItemsContainer />
+        <CatalogItemsContainer/>
       </div>
     </div>
   );
