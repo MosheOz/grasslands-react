@@ -8,7 +8,7 @@ const _ = require('lodash');
 
 function CatalogFilters(props) {
 
-    const { filters, subfilters, categories} = props
+    var { filters, subFilters, categories} = props
 
     let filtersData = []
     let subFiltersData = []
@@ -18,17 +18,49 @@ function CatalogFilters(props) {
     categoriesData = JSON.parse(localStorage.getItem("collections"))
 
     
-
-    function updateUrl(id,section){
+    var str = ""
+    function updateUrl(id,section,checkedTrue){
       if(section === 1){
-        window.location = window.location.pathname+"?&category=selected"+window.location.search.replace("?","")+"&category="+id
+        if(checkedTrue){
+          categories = _.without(categories, id)
+        }
+        else{
+          categories.push(id)
+        }
       }
       else if(section === 2){
-        window.location = window.location.pathname+"?&filter=selected"+window.location.search.replace("?","")+"&filter="+id
+        if(checkedTrue){
+          filters = _.without(filters, id)
+        }
+        else{
+          filters.push(id)
+        }
       }
       else if(section === 3){
-        window.location = window.location.pathname+"?&sub-filter=selected"+window.location.search.replace("?","")+"&sub-filter="+id
+        if(checkedTrue){
+          subFilters = _.without(subFilters, id)
+        }
+        else{
+          subFilters.push(id)
+        } 
       }
+      console.log(categories)
+      categories = _.uniq(categories)
+      categories.map((i)=>{
+        str = str + "&category="+i
+      })
+      filters = _.uniq(filters)
+      filters.map((i)=>{
+        str = str + "&filter="+i
+      })
+      subFilters = _.uniq(subFilters)
+      subFilters.map((i)=>{
+        str = str + "&sub-filter="+i
+      })
+      localStorage.setItem("workingSubFilters",JSON.stringify(subFilters))
+      localStorage.setItem("workingFilters",JSON.stringify(filters))
+      localStorage.setItem("workingCategories",JSON.stringify(categories))
+      window.location = window.location.pathname+"?&sub-filter=selected&filter=selected&category=selected"+str
     }
 
   return (
@@ -51,8 +83,9 @@ function CatalogFilters(props) {
         <div className="catalog-filters__spotlight__checkboxes">
           { 
             categoriesData && categoriesData.map((item)=>{
+              var checkedTrue = categories.includes(item.id)?true:false
               return(
-                <Checkbox value={item.name} onClick={(e)=>{updateUrl(item.id,1)}} />
+                <Checkbox value={item.name} checkedTrue={checkedTrue} onClick={(e)=>{updateUrl(item.id,1,checkedTrue)}} />
               )
             })
           }
@@ -64,8 +97,9 @@ function CatalogFilters(props) {
         <div className="catalog-filters__spotlight__checkboxes">
           { 
             filtersData && filtersData.map((item)=>{
+              var checkedTrue = filters.includes(item.id)?true:false
               return(
-                <Checkbox value={item.name} onClick={()=>{updateUrl(item.id,2)}}/>
+                <Checkbox value={item.name} checkedTrue={checkedTrue}  onClick={()=>{updateUrl(item.id,2,checkedTrue)}}/>
               )
             })
           }
@@ -78,8 +112,9 @@ function CatalogFilters(props) {
       <div className="catalog-filters__spotlight__checkboxes">
         { 
           subFiltersData && subFiltersData.map((item)=>{
+            var checkedTrue = subFilters.includes(item.id)?true:false
             return(
-              <Checkbox value={item.name} onClick={()=>{updateUrl(item.id,3)}}/>
+              <Checkbox value={item.name} checkedTrue={checkedTrue}  onClick={()=>{updateUrl(item.id,3,checkedTrue)}}/>
             )
           })
         }

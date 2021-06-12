@@ -22,7 +22,7 @@ function CatalogMain() {
       
 
     var query = queryString.parse(window.location.search)
-    
+
     filters = query["filter"] || JSON.parse(localStorage.getItem("workingFilters"))
     subFilters = query["sub-filter"] || JSON.parse(localStorage.getItem("workingSubFilters"))
     categories = query["category"] || JSON.parse(localStorage.getItem("workingCategories"))
