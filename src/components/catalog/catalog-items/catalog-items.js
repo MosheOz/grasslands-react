@@ -3,6 +3,8 @@ import ItemCard from "../../common/item-card/item-card";
 import "./catalog-items.css";
 import { useQuery } from "@apollo/client";
 import { GET_ITEMS } from "../../../queries/queries";
+const _ = require('lodash');
+
 
 // const produceData = [
 //   {
@@ -98,7 +100,7 @@ import { GET_ITEMS } from "../../../queries/queries";
 // ];
 
 function CatalogItems(props) {
-  const { collectionId, take, skip, showItem } = props;
+  const { collectionId, take, skip, showItem,filters,subFilters} = props;
   const { loading, error, data } = useQuery(GET_ITEMS, {
     variables: {
       collectionId: collectionId,
@@ -112,21 +114,30 @@ function CatalogItems(props) {
     <div>
       <div className="catalog-items__container">
         {data.search.items.map((item, i) => {
-         //console.log(item)
-          const price =
+         console.log(item.facetIds)
+         console.log(filters)
+         console.log(item.facetValueIds)
+         console.log(subFilters)
+         const price =
             item.priceWithTax.min || (item.priceWithTax.value / 100).toFixed(2);
-          return (
-            <ItemCard 
-              key={i}
-              title={item.productName}
-              img={item.productAsset.preview}
-              description={item.productName}
-              weight={item.productVariantPriceMeasurement}
-              price={price}
-              currencyCode={item.currencyCode}
-              showItem = {() => {showItem(item.productId)}}
-            />
-          );
+
+            if(_.intersection(item.facetIds,filters).length > 0 && _.intersection(item.facetValueIds,subFilters).length > 0){
+              console.log("printed")
+              return (
+                <ItemCard 
+                  key={i}
+                  title={item.productName}
+                  img={item.productAsset.preview}
+                  description={item.productName}
+                  weight={item.productVariantPriceMeasurement}
+                  price={price}
+                  currencyCode={item.currencyCode}
+                  showItem = {() => {showItem(item.productId)}}
+                />
+              )
+            }
+
+          
         })}
       </div>
     </div>

@@ -8,6 +8,8 @@ const GET_ITEMS = gql`
         productId
         slug
         currencyCode
+        facetIds
+        facetValueIds
         priceWithTax {
           ... on PriceRange {
             min
@@ -82,4 +84,45 @@ const GET_FILTERS_PARAMS = gql`
   }
 `;
 
-export { GET_ITEMS, GET_COLLECTIONS, GET_PRODUCT, GET_FILTERS_PARAMS };
+const GET_FILTERS_PARAMS_NEW_NEW = gql`
+    query{
+      products{
+        items{
+          facetValues{
+            id
+            name
+              facet{
+                id
+                name
+              }
+          }
+          collections{
+            id
+            name
+          }   
+        }
+      }
+    }
+`;
+
+const GET_FILTERS_PARAMS_NEW = gql`
+query{
+  products{
+  	items{
+      facetValues{
+        id  
+        name
+      }
+      collections{
+        id
+        name
+      }   
+    }
+  }
+}
+
+
+`
+
+
+export { GET_ITEMS, GET_COLLECTIONS, GET_PRODUCT, GET_FILTERS_PARAMS, GET_FILTERS_PARAMS_NEW_NEW };

@@ -12,11 +12,11 @@ import PageA from "./components/TestPages/PageA";
 import PageB from "./components/TestPages/PageB";
 
 import "./App.css";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/footer/footer";
 
 const client = new ApolloClient({
   uri: "http://licensee-1.api.grasslandsmarkets.com/shop-api",
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache()
 });
 
 function App() {
