@@ -3,13 +3,13 @@ import CatalogItemsContainer from "../catalog-items-container/catalog-items-cont
 import CatalogFilters from "../catalog-filters/catalog-filters";
 import "./catalog-main.css";
 import { useQuery } from "@apollo/client";
-import { GET_FILTERS_PARAMS_NEW_NEW } from "../../../queries/queries";
+import { GET_FILTERS_PARAMS_QUERY } from "../../../queries/queries";
 const _ = require('lodash');
 const queryString = require('querystring')
 
 function CatalogMain() {
 
-  const { loading, error, data } =useQuery(GET_FILTERS_PARAMS_NEW_NEW);
+  const { loading, error, data } =useQuery(GET_FILTERS_PARAMS_QUERY);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :</p>;
 

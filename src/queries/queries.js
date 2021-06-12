@@ -84,7 +84,7 @@ const GET_FILTERS_PARAMS = gql`
   }
 `;
 
-const GET_FILTERS_PARAMS_NEW_NEW = gql`
+const GET_FILTERS_PARAMS_QUERY = gql`
     query{
       products{
         items{
@@ -105,24 +105,6 @@ const GET_FILTERS_PARAMS_NEW_NEW = gql`
     }
 `;
 
-const GET_FILTERS_PARAMS_NEW = gql`
-query{
-  products{
-  	items{
-      facetValues{
-        id  
-        name
-      }
-      collections{
-        id
-        name
-      }   
-    }
-  }
-}
 
 
-`
-
-
-export { GET_ITEMS, GET_COLLECTIONS, GET_PRODUCT, GET_FILTERS_PARAMS, GET_FILTERS_PARAMS_NEW_NEW };
+export { GET_ITEMS, GET_COLLECTIONS, GET_PRODUCT, GET_FILTERS_PARAMS, GET_FILTERS_PARAMS_QUERY };
