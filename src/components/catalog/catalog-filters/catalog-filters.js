@@ -8,14 +8,18 @@ const _ = require('lodash');
 
 function CatalogFilters(props) {
 
+  
+
     var { filters,workingFilters } = props
 
-    
+    var showTrue =  workingFilters.includes("s")
+  
     function updateUrl(id,section,checkedTrue){
-      workingFilters = JSON.parse(localStorage.getItem("workingFilters"),true)
+      if(showTrue) { workingFilters = JSON.parse(localStorage.getItem("workingFilters"),true) }
+      else{ workingFilters = [] }
       var str = ""
       if(section === 1){
-        if(checkedTrue){
+        if(checkedTrue && showTrue){
           workingFilters = _.without(workingFilters, id)
         }
         else{
@@ -31,7 +35,6 @@ function CatalogFilters(props) {
       window.location = window.location.pathname+"?&f=s"+str
     }
     
-
   return (
     <div className="catalog-filters">
      <div className="h4-medium catalog-filters__title">Filters</div>
@@ -44,7 +47,7 @@ function CatalogFilters(props) {
               <div className="catalog-filters__spotlight__checkboxes">
               {
                 filter.subFilter && filter.subFilter.map((subFil)=>{
-                  var checkedTrue = workingFilters.includes(subFil.id)?true:false
+                  var checkedTrue = workingFilters.includes(subFil.id) && showTrue?true:false
                   return(
                     <Checkbox value={subFil.name} checkedTrue={checkedTrue} onClick={(e)=>{updateUrl(subFil.id,1,checkedTrue)}}/>
                   )

@@ -13,6 +13,7 @@ function CatalogMain() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :</p>;
 
+  
 
   let filters = []
   let workingFilters
