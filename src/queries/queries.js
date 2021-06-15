@@ -105,6 +105,27 @@ const GET_FILTERS_PARAMS_QUERY = gql`
     }
 `;
 
+const GET_FILTERS_PARAMS_QUERY_NEW = gql`
+  query{
+    search(input:{
+      collectionId:""
+    }) {
+      facetValues{
+        facetValue{
+          id
+          name
+          facet{
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+`;
 
 
-export { GET_ITEMS, GET_COLLECTIONS, GET_PRODUCT, GET_FILTERS_PARAMS, GET_FILTERS_PARAMS_QUERY };
+
+
+
+export { GET_ITEMS, GET_COLLECTIONS, GET_PRODUCT, GET_FILTERS_PARAMS, GET_FILTERS_PARAMS_QUERY,GET_FILTERS_PARAMS_QUERY_NEW };

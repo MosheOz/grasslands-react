@@ -9,34 +9,34 @@ import { GET_COLLECTIONS } from "../../../queries/queries";
 
 function CatalogItemsContainer(props) {
 
-  const {categories,filters,subFilters} = props
+  const {workingFilters} = props
 
   let history = useHistory();
   
   const showItem = (x) => {
     history.push("/item", { item: x });
   }
-  // const { loading, error, data } = useQuery(GET_COLLECTIONS);
+  const { loading, error, data } = useQuery(GET_COLLECTIONS);
 
-  // if (loading) return 'Loading...';
-  // if (error) return `Error! ${error.message}`;
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
 
-  var collection = JSON.parse(localStorage.getItem("collections"))
+  var collection = data.collections.items
 
+  
   
   return (
     <div>
       {
         collection.map((collection) => {
-        if(categories.includes(collection.id)){
           return(
-          <div>
-            <h3 className="ml-24 h3">{collection.name}</h3>
-            <CatalogItems key={collection.name} collectionId={collection.id} take={4} skip={0} showItem={showItem} filters={filters} subFilters={subFilters}/>
-          </div>
+            <div>
+              <h3 className="ml-24 h3">{collection.name}</h3>
+              <CatalogItems key={collection.name} collectionId={collection.id} take={4} skip={0} showItem={showItem} workingFilters={workingFilters}/>
+            </div>
           )
-        }
-      })}
+        })
+      }
     </div>
   );
 }

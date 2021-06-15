@@ -100,7 +100,7 @@ const _ = require('lodash');
 // ];
 
 function CatalogItems(props) {
-  const { collectionId, take, skip, showItem,filters,subFilters} = props;
+  const { collectionId, take, skip, showItem,workingFilters} = props;
   const { loading, error, data } = useQuery(GET_ITEMS, {
     variables: {
       collectionId: collectionId,
@@ -114,15 +114,10 @@ function CatalogItems(props) {
     <div>
       <div className="catalog-items__container">
         {data.search.items.map((item, i) => {
-         console.log(item.facetIds)
-         console.log(filters)
-         console.log(item.facetValueIds)
-         console.log(subFilters)
          const price =
             item.priceWithTax.min || (item.priceWithTax.value / 100).toFixed(2);
 
-            if(_.intersection(item.facetIds,filters).length > 0 && _.intersection(item.facetValueIds,subFilters).length > 0){
-              console.log("printed")
+            if(_.intersection(item.facetValueIds,workingFilters).length > 0){
               return (
                 <ItemCard 
                   key={i}

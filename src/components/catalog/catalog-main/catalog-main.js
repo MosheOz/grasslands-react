@@ -3,97 +3,79 @@ import CatalogItemsContainer from "../catalog-items-container/catalog-items-cont
 import CatalogFilters from "../catalog-filters/catalog-filters";
 import "./catalog-main.css";
 import { useQuery } from "@apollo/client";
-import { GET_FILTERS_PARAMS_QUERY } from "../../../queries/queries";
+import { GET_FILTERS_PARAMS_QUERY_NEW } from "../../../queries/queries";
 const _ = require('lodash');
 const queryString = require('querystring')
 
 function CatalogMain() {
 
-  const { loading, error, data } =useQuery(GET_FILTERS_PARAMS_QUERY);
+  const { loading, error, data } =useQuery(GET_FILTERS_PARAMS_QUERY_NEW);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :</p>;
 
 
   let filters = []
-  let subFilters = []
-  let categories = []
+  let workingFilters
+  
 
-  if (localStorage.getItem("workingCategories") !== null && localStorage.getItem("workingFilters") !== null) {
+  var groups = _.groupBy(data.search.facetValues,'facetValue.facet.id')
+  if (localStorage.getItem("workingFilters") !== null) {
       
 
     var query = queryString.parse(window.location.search)
 
-    filters = query["filter"] || JSON.parse(localStorage.getItem("workingFilters"))
-    subFilters = query["sub-filter"] || JSON.parse(localStorage.getItem("workingSubFilters"))
-    categories = query["category"] || JSON.parse(localStorage.getItem("workingCategories"))
-
+    workingFilters = query["f"] || JSON.parse(localStorage.getItem("workingFilters"),true)
+    filters = JSON.parse(localStorage.getItem("Filters"))
+    
 
   } else {
 
-    
     let arrayOfFilters = []
-    let arrayOfSubFilters = []
-    let arrayOfCollections = []
-    let arrayOfCategories = []
     let arrayOfWorkingFilters = []
-    let arrayOfWorkingSubFilters = []
+    
+    var groups = Object.entries(groups);
+    
+    groups.map((group)=>{
 
-    data.products.items.map((id)=>{
-
-      var dataForFilters = Object.entries(id)[1][1][0]
-      var dataForCollections =  Object.entries(id)[2][1][0]
-      if(typeof(dataForFilters) != "undefined"){
-        var tempSubFilters = {
-          "id": dataForFilters.facet.id,
-          "name": dataForFilters.facet.name
-        }
-        arrayOfFilters.push(tempSubFilters)
-        arrayOfWorkingFilters.push(tempSubFilters.id)
-
-
-        var tempFilters = {
-          "id": dataForFilters.id,
-          "name": dataForFilters.name
-        }
-        arrayOfSubFilters.push(tempFilters)
-        arrayOfWorkingSubFilters.push(tempFilters.id)
-      }
-      if(typeof(dataForCollections) != "undefined"){
-        var tempCollections = {
-          "id": dataForCollections.id,
-          "name": dataForCollections.name
-        }
-        arrayOfFilters.push(tempFilters)
-        arrayOfCollections.push(tempCollections)
-        arrayOfCategories.push(tempCollections.id)
+      var tempJSON = {
+        "id": group[1][0].facetValue.facet.id,
+        "name": group[1][0].facetValue.facet.name
       }
       
+      let tempArray = []
+      group[1].map((subGroups)=>{
+        var tempJSON = {
+          "id": subGroups.facetValue.id,
+          "name": subGroups.facetValue.name
+        }
+        arrayOfWorkingFilters.push(subGroups.facetValue.id)
+        tempArray.push(tempJSON)
+      });
+      
+      tempJSON.subFilter = tempArray
+      
+      arrayOfFilters.push(tempJSON)
+      
     })
-    arrayOfFilters = _.uniqBy(arrayOfFilters,'id')
-    arrayOfSubFilters = _.uniqBy(arrayOfSubFilters,'id')
-    arrayOfCollections = _.uniqBy(arrayOfCollections,'id')
-    
-      localStorage.setItem("filters",JSON.stringify(arrayOfFilters))
-      localStorage.setItem("sub-filters",JSON.stringify(arrayOfSubFilters))
-      localStorage.setItem("collections",JSON.stringify(arrayOfCollections))
+      console.log(arrayOfWorkingFilters)
+      console.log(arrayOfFilters)
+      localStorage.setItem("Filters",JSON.stringify(arrayOfFilters))
       localStorage.setItem("workingFilters",JSON.stringify(arrayOfWorkingFilters))
-      localStorage.setItem("workingSubFilters",JSON.stringify(arrayOfWorkingSubFilters))
-      localStorage.setItem("workingCategories",JSON.stringify(arrayOfCategories))
+    
 
-
-    filters = arrayOfWorkingFilters
-    categories = arrayOfCategories
-    subFilters = arrayOfWorkingSubFilters
+    filters = arrayOfFilters
+    workingFilters = arrayOfWorkingFilters
   }
 
 
+  
   return (
     <div className="catalog-main__container">
       <div className="catalog-main__filters">
-        <CatalogFilters categories={categories} subFilters={subFilters} filters={filters} />
+        <CatalogFilters filters={filters} workingFilters = {workingFilters}/>
       </div>
       <div className="catalog-main__items">
-        <CatalogItemsContainer categories={categories} filters={filters} subFilters={subFilters}/>
+        <CatalogItemsContainer workingFilters={workingFilters}/>
       </div>
     </div>
   );

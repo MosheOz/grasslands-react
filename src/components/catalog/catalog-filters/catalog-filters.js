@@ -8,118 +8,54 @@ const _ = require('lodash');
 
 function CatalogFilters(props) {
 
-    var { filters, subFilters, categories} = props
-
-    let filtersData = []
-    let subFiltersData = []
-    let categoriesData = []
-    filtersData = JSON.parse(localStorage.getItem("filters"))
-    subFiltersData = JSON.parse(localStorage.getItem("sub-filters"))
-    categoriesData = JSON.parse(localStorage.getItem("collections"))
+    var { filters,workingFilters } = props
 
     
-    var str = ""
     function updateUrl(id,section,checkedTrue){
+      workingFilters = JSON.parse(localStorage.getItem("workingFilters"),true)
+      var str = ""
       if(section === 1){
         if(checkedTrue){
-          categories = _.without(categories, id)
+          workingFilters = _.without(workingFilters, id)
         }
         else{
-          categories.push(id)
+          workingFilters.push(id)
         }
       }
-      else if(section === 2){
-        if(checkedTrue){
-          filters = _.without(filters, id)
-        }
-        else{
-          filters.push(id)
-        }
-      }
-      else if(section === 3){
-        if(checkedTrue){
-          subFilters = _.without(subFilters, id)
-        }
-        else{
-          subFilters.push(id)
-        } 
-      }
-      console.log(categories)
-      categories = _.uniq(categories)
-      categories.map((i)=>{
-        str = str + "&category="+i
+      workingFilters = _.uniq(workingFilters)
+      workingFilters.map((i)=>{
+        str = str + "&f="+i
       })
-      filters = _.uniq(filters)
-      filters.map((i)=>{
-        str = str + "&filter="+i
-      })
-      subFilters = _.uniq(subFilters)
-      subFilters.map((i)=>{
-        str = str + "&sub-filter="+i
-      })
-      localStorage.setItem("workingSubFilters",JSON.stringify(subFilters))
-      localStorage.setItem("workingFilters",JSON.stringify(filters))
-      localStorage.setItem("workingCategories",JSON.stringify(categories))
-      window.location = window.location.pathname+"?&sub-filter=selected&filter=selected&category=selected"+str
+      console.log(str)
+      localStorage.setItem("workingFilters",JSON.stringify(workingFilters))
+      window.location = window.location.pathname+"?&f=s"+str
     }
+    
 
   return (
     <div className="catalog-filters">
-    
-      <div className="h4-medium catalog-filters__title">Filters</div>
+     <div className="h4-medium catalog-filters__title">Filters</div>
+      {
+        filters && filters.map((filter)=>{
+          console.log(filter)
+          return(
+            <div className="catalog-filters__spotlight">
+              <div className="h6-medium">{ filter.name }</div>
+              <div className="catalog-filters__spotlight__checkboxes">
+              {
+                filter.subFilter && filter.subFilter.map((subFil)=>{
+                  var checkedTrue = workingFilters.includes(subFil.id)?true:false
+                  return(
+                    <Checkbox value={subFil.name} checkedTrue={checkedTrue} onClick={(e)=>{updateUrl(subFil.id,1,checkedTrue)}}/>
+                  )
+                })
+              }
+              </div>
+            </div>
+          )
+        })
+      }
 
-      <Checkbox value="Sale" />
-
-      <div className="catalog-filters__spotlight">
-        <div className="h6-medium">Spotlight</div>
-        <div className="catalog-filters__spotlight__checkboxes">
-          <Checkbox value="Seasonal" />
-          <Checkbox value="Local" />
-        </div>
-      </div>
-
-      <div className="catalog-filters__spotlight">
-        <div className="h6-medium">Categories</div>
-        <div className="catalog-filters__spotlight__checkboxes">
-          { 
-            categoriesData && categoriesData.map((item)=>{
-              var checkedTrue = categories.includes(item.id)?true:false
-              return(
-                <Checkbox value={item.name} checkedTrue={checkedTrue} onClick={(e)=>{updateUrl(item.id,1,checkedTrue)}} />
-              )
-            })
-          }
-        </div>
-      </div>
-
-      <div className="catalog-filters__spotlight">
-        <div className="h6-medium">Filters</div>
-        <div className="catalog-filters__spotlight__checkboxes">
-          { 
-            filtersData && filtersData.map((item)=>{
-              var checkedTrue = filters.includes(item.id)?true:false
-              return(
-                <Checkbox value={item.name} checkedTrue={checkedTrue}  onClick={()=>{updateUrl(item.id,2,checkedTrue)}}/>
-              )
-            })
-          }
-        </div>
-      </div>
-
-
-      <div className="catalog-filters__spotlight">
-      <div className="h6-medium">Sub-Filters</div>
-      <div className="catalog-filters__spotlight__checkboxes">
-        { 
-          subFiltersData && subFiltersData.map((item)=>{
-            var checkedTrue = subFilters.includes(item.id)?true:false
-            return(
-              <Checkbox value={item.name} checkedTrue={checkedTrue}  onClick={()=>{updateUrl(item.id,3,checkedTrue)}}/>
-            )
-          })
-        }
-      </div>
-      </div>
   </div>
   );
 }
