@@ -17,7 +17,7 @@ import CollectionsOverviewContainer from "./components/catalog/catalog-main/cata
 
 import { MyContextProvider } from "./context";
 const client = new ApolloClient({
-  uri: "https://licensee-1.api.grasslandsmarkets.com/shop-api",
+  uri: "http://licensee-1.api.grasslandsmarkets.com/shop-api",
   cache: new InMemoryCache(),
 });
 
