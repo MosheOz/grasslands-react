@@ -17,7 +17,7 @@ import CollectionsOverviewContainer from "./components/catalog/catalog-main/cata
 
 import { MyContextProvider } from "./context";
 const client = new ApolloClient({
-  uri: "http://licensee-1.api.grasslandsmarkets.com/shop-api",
+  uri: "https://licensee-1.api.grasslandsmarkets.com/shop-api",
   cache: new InMemoryCache(),
 });
 
@@ -30,12 +30,11 @@ function App() {
             <Header />
             <main className="main">
               <Switch>
-                <Route path="/Catalog" exact component={Catalog} />
                 <Route path="/PageA" exact component={PageA} />
                 <Route path="/PageB" exact component={PageB} />
                 <Route path="/Item" exact component={Item} />
                 <Route
-                  path="/test"
+                  path="/catalog"
                   exact
                   component={CollectionsOverviewContainer}
                 />
@@ -50,3 +49,4 @@ function App() {
 }
 
 export default App;
+{/* <Route path="/Catalog" exact component={Catalog} /> */}
