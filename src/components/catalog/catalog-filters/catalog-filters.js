@@ -1,48 +1,65 @@
-import React from "react";
-import "./catalog-filters.css";
-import Checkbox from "../../common/checkbox/checkbox";
-import { useQuery } from "@apollo/client";
-import { GET_FILTERS_PARAMS } from "../../../queries/queries";
-const _ = require('lodash');
+import React, { useContext } from "react";
 
-function CatalogFilters() {
-  const { loading, error, data } = useQuery(GET_FILTERS_PARAMS);
-	if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :</p>;
-	const filters = _.groupBy(
-		data.search.facetValues,
-		'facetValue.facet.name',
-	);
-  console.log(filters);
+import "./catalog-filters.css";
+
+// import Checkbox from "../../common/checkbox/checkbox";
+import { MyContext } from "../../../context";
+import CatalogCollectionsFilters from "../catalog-collections-filters/catalog-collections-filters";
+import CatalogSubFilters from "../catalog-sub-filters/catalog-sub-filters.component";
+// const _ = require("lodash");
+
+function CatalogFilters({ filters }) {
+  const { searchState, setSearchState } = useContext(MyContext);
+
+  const { facetValueIds, collectionId } = searchState;
+
+  const addFacetValueId = (fv) => {
+    const facetValueId = fv.id;
+    setSearchState({
+      ...searchState,
+      facetValueIds: [...facetValueIds, facetValueId],
+    });
+  };
+
+  const removeFacetValueId = (fv) => {
+    const facetValueId = fv.id;
+    setSearchState({
+      ...searchState,
+      facetValueIds: facetValueIds.filter((fv) => fv !== facetValueId),
+    });
+  };
+
+  const addCollectionId = ({ id }) => {
+    setSearchState({
+      ...searchState,
+      facetValueIds: [],
+      collectionId: id,
+      facetFaluesPerCollectionInit: true,
+    });
+  };
+
+  const removeCollectionId = (col) => {
+    setSearchState({
+      ...searchState,
+      facetValueIds: [],
+      collectionId: null,
+    });
+  };
+
   return (
     <div className="catalog-filters">
       <div className="h4-medium catalog-filters__title">Filters</div>
+      <CatalogCollectionsFilters
+        addCollectionId={addCollectionId}
+        removeCollectionId={removeCollectionId}
+        collectionId={collectionId}
+      />
 
-      <Checkbox value="Sale" />
-
-      <div className="catalog-filters__spotlight">
-        <div className="h6-medium">Spotlight</div>
-        <div className="catalog-filters__spotlight__checkboxes">
-          <Checkbox value="Seasonal" />
-          <Checkbox value="Local" />
-        </div>
-      </div>
-
-      <div className="catalog-filters__spotlight">
-        <div className="h6-medium">Spotlight</div>
-        <div className="catalog-filters__spotlight__checkboxes">
-          <Checkbox value="Seasonal" />
-          <Checkbox value="Local" />
-        </div>
-      </div>
-
-      <div className="catalog-filters__spotlight">
-        <div className="h6-medium">Spotlight</div>
-        <div className="catalog-filters__spotlight__checkboxes">
-          <Checkbox value="Seasonal" />
-          <Checkbox value="Local" />
-        </div>
-      </div>
+      <CatalogSubFilters
+        addFacetValueId={addFacetValueId}
+        removeFacetValueId={removeFacetValueId}
+        filters={filters}
+      />
     </div>
   );
 }

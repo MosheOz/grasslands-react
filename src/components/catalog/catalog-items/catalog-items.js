@@ -112,7 +112,6 @@ function CatalogItems(props) {
     <div>
       <div className="catalog-items__container">
         {data.search.items.map((item, i) => {
-         //console.log(item)
           const price =
             item.priceWithTax.min || (item.priceWithTax.value / 100).toFixed(2);
           return (

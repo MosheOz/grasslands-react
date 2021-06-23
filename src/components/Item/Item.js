@@ -6,24 +6,25 @@ import { useQuery } from "@apollo/client";
 import { GET_PRODUCT } from "../../queries/queries";
 
 function Item(props) {
-
-	window.scrollTo(0, 0);
+  window.scrollTo(0, 0);
 
   let productId = props.location.state.item;
   const { loading, error, data } = useQuery(GET_PRODUCT, {
     variables: { productId },
   });
 
-  if (loading) return 'Loading...';
+  if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-
-  console.log(data);
 
   return (
     <div className="item">
       <div className="item__image-container">
         <div className="item__image-container--image">
-          <img className="item__image-container--img" src={data?.product?.featuredAsset?.preview} alt="''"></img>
+          <img
+            className="item__image-container--img"
+            src={data?.product?.featuredAsset?.preview}
+            alt="''"
+          ></img>
         </div>
         <div className="item__image-container--image-gallery"></div>
       </div>
@@ -33,7 +34,9 @@ function Item(props) {
           <span className="item__details__info__supplier h7-regular">
             {data?.product?.merchant?.name}
           </span>
-          <span className="item__details__info__title h2">{data?.product?.slug}</span>
+          <span className="item__details__info__title h2">
+            {data?.product?.slug}
+          </span>
           <span className="item__details__info__weight h5-regular">
             per 1 lb
           </span>

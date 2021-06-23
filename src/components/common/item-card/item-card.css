@@ -6,6 +6,7 @@
   width: 270px;
   max-width: 270px;
   margin-left: 16px;
+  margin-bottom: 16px;
   position: relative;
 }
 
@@ -97,5 +98,5 @@
   justify-content: space-evenly;
   align-items: center;
   align-content: center;
-	cursor: pointer;
+  cursor: pointer;
 }

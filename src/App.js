@@ -12,8 +12,10 @@ import PageA from "./components/TestPages/PageA";
 import PageB from "./components/TestPages/PageB";
 
 import "./App.css";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/footer/footer";
+import CollectionsOverviewContainer from "./components/catalog/catalog-main/catalog-main.container";
 
+import { MyContextProvider } from "./context";
 const client = new ApolloClient({
   uri: "http://licensee-1.api.grasslandsmarkets.com/shop-api",
   cache: new InMemoryCache(),
@@ -21,22 +23,29 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <div className="app">
-          <Header />
-          <main className="main">
-            <Switch>
-              <Route path="/Catalog" exact component={Catalog} />
-              <Route path="/PageA" exact component={PageA} />
-              <Route path="/PageB" exact component={PageB} />
-              <Route path="/Item" exact component={Item} />
-            </Switch>
-          </main>
-          <Footer />
-        </div>
-      </BrowserRouter>
-    </ApolloProvider>
+    <MyContextProvider>
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <div className="app">
+            <Header />
+            <main className="main">
+              <Switch>
+                <Route path="/Catalog" exact component={Catalog} />
+                <Route path="/PageA" exact component={PageA} />
+                <Route path="/PageB" exact component={PageB} />
+                <Route path="/Item" exact component={Item} />
+                <Route
+                  path="/test"
+                  exact
+                  component={CollectionsOverviewContainer}
+                />
+              </Switch>
+            </main>
+            <Footer />
+          </div>
+        </BrowserRouter>
+      </ApolloProvider>
+    </MyContextProvider>
   );
 }
 

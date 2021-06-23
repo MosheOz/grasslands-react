@@ -3,10 +3,10 @@ import "./item-card.css";
 import BasketIcon from "../svg/basket/basket";
 
 function ItemCard(props) {
-  const { title, img, description, weight, price, currencyCode, showItem } = props;
+  const { title, img, description, weight, price, showItem } = props;
 
   return (
-     <div  onClick={showItem}>
+    <div onClick={showItem}>
       <div className="item-card">
         <div className="item-card__container">
           <div className="item-card__img-section">
@@ -29,8 +29,8 @@ function ItemCard(props) {
               <i>
                 <BasketIcon />
               </i>{" "}
-            Add
-          </button>
+              Add
+            </button>
           </div>
         </div>
       </div>

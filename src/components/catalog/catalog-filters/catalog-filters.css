@@ -1,3 +1,7 @@
+.catalog-filters {
+  min-width: 193px;
+}
+
 .catalog-filters__title {
   margin-bottom: 35px;
 }

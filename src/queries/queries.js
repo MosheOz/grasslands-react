@@ -82,4 +82,88 @@ const GET_FILTERS_PARAMS = gql`
   }
 `;
 
-export { GET_ITEMS, GET_COLLECTIONS, GET_PRODUCT, GET_FILTERS_PARAMS };
+const GET_ITEMS_WITH_FILTERS = gql`
+  query (
+    $term: String
+    $facetValueIds: [ID!]
+    $collectionId: ID
+    $take: Int
+    $skip: Int
+    $sort: SearchResultSortParameter
+  ) {
+    search(
+      input: {
+        term: $term
+        facetValueIds: $facetValueIds
+        collectionId: $collectionId
+        take: $take
+        skip: $skip
+        sort: $sort
+      }
+    ) {
+      facetValues {
+        count
+        facetValue {
+          id
+          name
+          facet {
+            id
+            name
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      items {
+        sku
+        productName
+        productId
+        slug
+        currencyCode
+        price {
+          __typename
+        }
+        productVariantId
+        productVariantName
+        productVariantAsset {
+          id
+          preview
+          focalPoint {
+            x
+            y
+          }
+        }
+        currencyCode
+        facetIds
+        merchant {
+          name
+        }
+        priceWithTax {
+          ... on PriceRange {
+            min
+            max
+          }
+        }
+        productVariantPriceMeasurement
+        description
+        productAsset {
+          id
+          preview
+          focalPoint {
+            x
+            y
+          }
+        }
+      }
+    }
+  }
+`;
+
+export {
+  GET_ITEMS,
+  GET_COLLECTIONS,
+  GET_PRODUCT,
+  GET_FILTERS_PARAMS,
+  GET_ITEMS_WITH_FILTERS,
+};
