@@ -15,6 +15,7 @@ function Header() {
       ...searchState,
       facetValueIds: [],
       collectionId: e.target.value !== "Categories" ? e.target.value : null,
+			facetFaluesPerCollectionInit: true,
     });
   };
 

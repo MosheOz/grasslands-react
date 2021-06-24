@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./components/header/Header";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
-import Catalog from "./components/home/Catalog";
 import Item from "./components/Item/Item";
 
 import PageA from "./components/TestPages/PageA";
@@ -38,6 +37,11 @@ function App() {
                   exact
                   component={CollectionsOverviewContainer}
                 />
+                <Route
+                  path="/"
+                  exact
+                  component={CollectionsOverviewContainer}
+                />
               </Switch>
             </main>
             <Footer />
@@ -49,4 +53,6 @@ function App() {
 }
 
 export default App;
-{/* <Route path="/Catalog" exact component={Catalog} /> */}
+{
+  /* <Route path="/Catalog" exact component={Catalog} /> */
+}

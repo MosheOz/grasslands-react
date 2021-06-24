@@ -18,14 +18,7 @@ function CatalogItemsContainer({ collectionId, facetValueIds, items }) {
   if (error) return `Error! ${error.message}`;
 
   return (
-    <div
-    // className="catalog-items__container"
-    // className={
-    //   facetValueIds.length || collectionId !== null
-    //     ? "catalog-items__container"
-    //     : ""
-    // }
-    >
+    <div>
       {facetValueIds.length || collectionId !== null ? (
         <CatalogItemsFiltered
           collectionId={collectionId}
