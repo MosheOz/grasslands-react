@@ -14,7 +14,7 @@ import "./App.css";
 import Footer from "./components/footer/footer";
 import CollectionsOverviewContainer from "./components/catalog/catalog-main/catalog-main.container";
 
-import { MyContextProvider } from "./context";
+import { FilterContextProvider } from "./context";
 const client = new ApolloClient({
   uri: "http://licensee-1.api.grasslandsmarkets.com/shop-api",
   cache: new InMemoryCache(),
@@ -22,7 +22,7 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <MyContextProvider>
+    <FilterContextProvider>
       <ApolloProvider client={client}>
         <BrowserRouter>
           <div className="app">
@@ -35,11 +35,13 @@ function App() {
                 <Route
                   path="/catalog"
                   exact
+                  // render={() => <CollectionsOverviewContainer />}
                   component={CollectionsOverviewContainer}
                 />
                 <Route
                   path="/"
                   exact
+                  // render={() => <CollectionsOverviewContainer />}
                   component={CollectionsOverviewContainer}
                 />
               </Switch>
@@ -48,11 +50,8 @@ function App() {
           </div>
         </BrowserRouter>
       </ApolloProvider>
-    </MyContextProvider>
+    </FilterContextProvider>
   );
 }
 
 export default App;
-{
-  /* <Route path="/Catalog" exact component={Catalog} /> */
-}

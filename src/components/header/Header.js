@@ -5,17 +5,19 @@ import PersonIcon from "../common/svg/person-icon/person-icon";
 import BasketIcon from "../common/svg/basket/basket";
 import { GET_COLLECTIONS } from "../../queries/queries";
 import { useQuery } from "@apollo/client";
-import { MyContext } from "../../context";
+import { FilterContext } from "../../context";
 
 function Header() {
-  const { searchState, setSearchState } = useContext(MyContext);
+  const { searchState, setSearchState } = useContext(FilterContext);
+
+  const { term } = searchState;
 
   const updateFilters = (e) => {
     setSearchState({
       ...searchState,
       facetValueIds: [],
       collectionId: e.target.value !== "Categories" ? e.target.value : null,
-			facetFaluesPerCollectionInit: true,
+      facetFaluesPerCollectionInit: true,
     });
   };
 
@@ -37,7 +39,11 @@ function Header() {
   return (
     <header className="header">
       <span className="header__logo">Grasslands</span>
-      <input className="header__search" onChange={onSearchBox}></input>
+      <input
+        className="header__search"
+        onChange={onSearchBox}
+        value={term}
+      ></input>
       <select className="header__categories-dropdown" onChange={updateFilters}>
         <option>Categories</option>
         {data.collections.items.map((col) => (

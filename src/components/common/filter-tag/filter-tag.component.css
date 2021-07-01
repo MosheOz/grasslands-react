@@ -1,0 +1,22 @@
+.filter-tag {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 95px;
+  height: 20px;
+  padding: 8px 16px;
+  background: #ffffff;
+  border-radius: 8px;
+	margin-left: 15px;
+}
+
+.filter-tag__value {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.filter-tag__remove {
+	cursor: pointer;
+}

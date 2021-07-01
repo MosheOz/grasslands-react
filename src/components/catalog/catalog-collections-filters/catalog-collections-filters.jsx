@@ -5,8 +5,8 @@ import Checkbox from "../../common/checkbox/checkbox";
 
 const CatalogCollectionsFilters = ({
   collectionId,
-  addCollectionId,
-  removeCollectionId,
+  updateFacetsValues,
+  removeFacetsValues,
 }) => {
   const { loading, error, data } = useQuery(GET_COLLECTIONS);
 
@@ -20,7 +20,7 @@ const CatalogCollectionsFilters = ({
         {data.collections.items.map((col) => {
           const { name, id } = col;
           let isChecked = false;
-          if (collectionId && id === collectionId) {
+          if (collectionId && id === collectionId.id) {
             isChecked = true;
           }
           const isCategorySelected = true;
@@ -28,8 +28,8 @@ const CatalogCollectionsFilters = ({
 
           return (
             <Checkbox
-              addFacetValueId={addCollectionId}
-              removeFacetValueId={removeCollectionId}
+              updateFacetsValues={updateFacetsValues}
+              removeFacetsValues={removeFacetsValues}
               value={name}
               isChecked={isChecked}
               facetValue={col}

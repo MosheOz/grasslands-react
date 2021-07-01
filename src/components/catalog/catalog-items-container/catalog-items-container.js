@@ -1,5 +1,5 @@
 import React from "react";
-// import { MyContext } from "../../../context";
+// import { filterContext } from "../../../context";
 import { useHistory } from "react-router-dom";
 import CatalogItems from "../catalog-items/catalog-items";
 import { useQuery } from "@apollo/client";

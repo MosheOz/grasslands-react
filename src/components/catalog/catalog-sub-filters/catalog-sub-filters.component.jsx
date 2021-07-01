@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import { MyContext } from "../../../context";
+import { FilterContext } from "../../../context";
 import Checkbox from "../../common/checkbox/checkbox";
 
 const CatalogSubFilters = ({
   filters,
-  addFacetValueId,
-  removeFacetValueId,
+  updateFacetsValues,
+  removeFacetsValues,
 }) => {
-  const { searchState } = useContext(MyContext);
+  const { searchState } = useContext(FilterContext);
 
   const {
     collectionId,
@@ -33,15 +33,15 @@ const CatalogSubFilters = ({
                     let isChecked = false;
                     if (
                       collectionId &&
-                      facetValueIds.some((x) => x === fv.facetValue.id)
+                      facetValueIds.some((x) => x.id === fv.facetValue.id)
                     ) {
                       isChecked = true;
                     }
                     const { name, id } = fv.facetValue;
                     return (
                       <Checkbox
-                        addFacetValueId={addFacetValueId}
-                        removeFacetValueId={removeFacetValueId}
+                        updateFacetsValues={updateFacetsValues}
+                        removeFacetsValues={removeFacetsValues}
                         value={name}
                         facetValue={fv.facetValue}
                         isChecked={isChecked}
@@ -62,15 +62,15 @@ const CatalogSubFilters = ({
                     let isChecked = false;
                     if (
                       !collectionId &&
-                      facetValueIds.some((x) => x === fv.facetValue.id)
+                      facetValueIds.some((x) => x.id === fv.facetValue.id)
                     ) {
                       isChecked = true;
                     }
                     const { name, id } = fv.facetValue;
                     return (
                       <Checkbox
-                        addFacetValueId={addFacetValueId}
-                        removeFacetValueId={removeFacetValueId}
+                        updateFacetsValues={updateFacetsValues}
+                        removeFacetsValues={removeFacetsValues}
                         value={name}
                         facetValue={fv.facetValue}
                         isChecked={isChecked}

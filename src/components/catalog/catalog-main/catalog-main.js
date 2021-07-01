@@ -2,10 +2,11 @@ import React, { useContext, useEffect } from "react";
 import CatalogItemsContainer from "../catalog-items-container/catalog-items-container";
 import CatalogFilters from "../catalog-filters/catalog-filters";
 import "./catalog-main.css";
-import { MyContext } from "../../../context";
+import { FilterContext } from "../../../context";
+import CatalogFiltersTags from "../catalog-filters-tags/catalog-filters-tags.component";
 
 function CatalogMain({ filters, items }) {
-  const { searchState, setSearchState } = useContext(MyContext);
+  const { searchState, setSearchState } = useContext(FilterContext);
 
   const { collectionId, facetValueIds, isInit, facetFaluesPerCollectionInit } =
     searchState;
@@ -35,6 +36,7 @@ function CatalogMain({ filters, items }) {
         <CatalogFilters filters={filters} />
       </div>
       <div className="catalog-main__items">
+        <CatalogFiltersTags />
         <CatalogItemsContainer
           collectionId={collectionId}
           facetValueIds={facetValueIds}

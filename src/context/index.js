@@ -11,23 +11,16 @@ const initialState = {
   collectionId: null,
 };
 
-const MyContext = React.createContext(initialState);
+const FilterContext = React.createContext(initialState);
 
-const MyContextProvider = ({ children }) => {
+const FilterContextProvider = ({ children }) => {
   const [searchState, setSearchState] = useState(initialState);
-
-  // useEffect(() => {
-  //   const res = fetch();
-  //   setSearchState({
-  //     ...initialState,
-  //     res,
-  //   });
-  // }, []);
+	
   return (
-    <MyContext.Provider value={{ searchState, setSearchState }}>
+    <FilterContext.Provider value={{ searchState, setSearchState }}>
       {children}
-    </MyContext.Provider>
+    </FilterContext.Provider>
   );
 };
 
-export { MyContext, MyContextProvider };
+export { FilterContext, FilterContextProvider };

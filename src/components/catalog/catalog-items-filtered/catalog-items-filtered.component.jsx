@@ -5,6 +5,7 @@ import { GET_COLLECTIONS } from "../../../queries/queries";
 import ItemCard from "../../common/item-card/item-card";
 
 const CatalogItemsFiltered = ({ collectionId, facetValueIds, items }) => {
+	console.log('collectionId ', collectionId)
   const history = useHistory();
   const { loading, error, data } = useQuery(GET_COLLECTIONS);
 
@@ -20,7 +21,7 @@ const CatalogItemsFiltered = ({ collectionId, facetValueIds, items }) => {
 
   if (collectionId) {
     collectionName = data.collections.items.find(
-      (col) => col.id === collectionId
+      (col) => col.id === collectionId.id
     ).name;
   }
   return (

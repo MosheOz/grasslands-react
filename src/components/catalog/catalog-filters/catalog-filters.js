@@ -2,62 +2,69 @@ import React, { useContext } from "react";
 
 import "./catalog-filters.css";
 
-// import Checkbox from "../../common/checkbox/checkbox";
-import { MyContext } from "../../../context";
+import { FilterContext } from "../../../context";
 import CatalogCollectionsFilters from "../catalog-collections-filters/catalog-collections-filters";
 import CatalogSubFilters from "../catalog-sub-filters/catalog-sub-filters.component";
-// const _ = require("lodash");
 
 function CatalogFilters({ filters }) {
-  const { searchState, setSearchState } = useContext(MyContext);
+  const { searchState, setSearchState } = useContext(FilterContext);
 
   const { facetValueIds, collectionId } = searchState;
 
-  const addFacetValueId = (fv) => {
-    const facetValueId = fv.id;
-    setSearchState({
-      ...searchState,
-      facetValueIds: [...facetValueIds, facetValueId],
-    });
+  const updateFacetsValues = (fv) => {
+    console.log(fv);
+    const { __typename } = fv;
+
+    if (__typename === "FacetValue") {
+      const facetValueId = fv;
+      setSearchState({
+        ...searchState,
+        facetValueIds: [...facetValueIds, facetValueId],
+      });
+    } else if (__typename === "Collection") {
+      setSearchState({
+        ...searchState,
+        facetValueIds: [],
+        collectionId: fv,
+        facetFaluesPerCollectionInit: true,
+      });
+    }
   };
 
-  const removeFacetValueId = (fv) => {
-    const facetValueId = fv.id;
-    setSearchState({
-      ...searchState,
-      facetValueIds: facetValueIds.filter((fv) => fv !== facetValueId),
-    });
-  };
+  const removeFacetsValues = (fv) => {
+    console.log(fv);
+    const { __typename } = fv;
+    console.log("__typename ", __typename === "FacetValue");
 
-  const addCollectionId = ({ id }) => {
-    setSearchState({
-      ...searchState,
-      facetValueIds: [],
-      collectionId: id,
-      facetFaluesPerCollectionInit: true,
-    });
-  };
-
-  const removeCollectionId = (col) => {
-    setSearchState({
-      ...searchState,
-      facetValueIds: [],
-      collectionId: null,
-    });
+    if (__typename === "FacetValue") {
+      const facetValueId = fv.id;
+      setSearchState({
+        ...searchState,
+        facetValueIds: facetValueIds.filter((fv) => {
+          return fv.id !== facetValueId;
+        }),
+      });
+    } else if (__typename === "Collection") {
+      setSearchState({
+        ...searchState,
+        facetValueIds: [],
+        collectionId: null,
+      });
+    }
   };
 
   return (
     <div className="catalog-filters">
       <div className="h4-medium catalog-filters__title">Filters</div>
       <CatalogCollectionsFilters
-        addCollectionId={addCollectionId}
-        removeCollectionId={removeCollectionId}
+        updateFacetsValues={updateFacetsValues}
+        removeFacetsValues={removeFacetsValues}
         collectionId={collectionId}
       />
 
       <CatalogSubFilters
-        addFacetValueId={addFacetValueId}
-        removeFacetValueId={removeFacetValueId}
+        updateFacetsValues={updateFacetsValues}
+        removeFacetsValues={removeFacetsValues}
         filters={filters}
       />
     </div>
