@@ -12,7 +12,6 @@ function CatalogFilters({ filters }) {
   const { facetValueIds, collectionId } = searchState;
 
   const updateFacetsValues = (fv) => {
-    console.log(fv);
     const { __typename } = fv;
 
     if (__typename === "FacetValue") {
@@ -32,10 +31,8 @@ function CatalogFilters({ filters }) {
   };
 
   const removeFacetsValues = (fv) => {
-    console.log(fv);
     const { __typename } = fv;
-    console.log("__typename ", __typename === "FacetValue");
-
+		
     if (__typename === "FacetValue") {
       const facetValueId = fv.id;
       setSearchState({

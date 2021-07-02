@@ -34,14 +34,13 @@ const CatalogFiltersTags = () => {
         facetValueIdsPerCollection: [],
         facetValueIds: [],
         collectionId: null,
-        term: '',
+        term: "",
       });
     }
   };
 
   if (facetValueIds.length || collectionId !== null || term !== "") {
     const combinedValues = [...facetValueIds, collectionId, term];
-    console.log("combinedValues ", combinedValues);
 
     return combinedValues.length ? (
       <div className="catalog-filters-tags">
@@ -62,7 +61,7 @@ const CatalogFiltersTags = () => {
               value={name}
               typeName={typeName}
               id={id}
-							key={i}
+              key={i}
             />
           );
         })}

@@ -5,13 +5,11 @@ import { GET_COLLECTIONS } from "../../../queries/queries";
 import ItemCard from "../../common/item-card/item-card";
 
 const CatalogItemsFiltered = ({ collectionId, facetValueIds, items }) => {
-	console.log('collectionId ', collectionId)
   const history = useHistory();
   const { loading, error, data } = useQuery(GET_COLLECTIONS);
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-
 
   const showItem = (x) => {
     history.push("/item", { item: x });

@@ -13,10 +13,12 @@ function Header() {
   const { term } = searchState;
 
   const updateFilters = (e) => {
+    const collection =
+      e.target.value !== "Categories" ? JSON.parse(e.target.value) : null;
     setSearchState({
       ...searchState,
       facetValueIds: [],
-      collectionId: e.target.value !== "Categories" ? e.target.value : null,
+      collectionId: collection,
       facetFaluesPerCollectionInit: true,
     });
   };
@@ -46,11 +48,13 @@ function Header() {
       ></input>
       <select className="header__categories-dropdown" onChange={updateFilters}>
         <option>Categories</option>
-        {data.collections.items.map((col) => (
-          <option value={col.id} key={col.id}>
-            {col.name}
-          </option>
-        ))}
+        {data.collections.items.map((col) => {
+          return (
+            <option value={JSON.stringify(col)} key={col.id}>
+              {col.name}
+            </option>
+          );
+        })}
       </select>
       <div className="header__management">
         <span className="header__language">עברית</span>
