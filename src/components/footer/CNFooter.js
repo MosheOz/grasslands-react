@@ -7,7 +7,7 @@ const CNFooter = () => {
         <div className=" Cn-footer-background">
             <div className="container">
                 <div className="row">
-                    <div className=" col-sm-12 text-center col-12 Cn-footer-logo pt-2 col-md-4">
+                    <div className=" col-sm-12 col-12 Cn-footer-logo pt-2 col-md-4">
                         <span className="Cn-footer-logo " style={{ fontSize: "23px" }}>Grasslands</span>
                     </div>
                     <div className="col-md-2 col-sm-6 Cn-footer col-6 center ">

@@ -6,6 +6,8 @@ import { useQuery } from "@apollo/client";
 import { GET_COLLECTIONS } from "../../../queries/queries";
 import CatalogItemsFiltered from "../catalog-items-filtered/catalog-items-filtered.component";
 
+import "./catalog-items-container.css";
+
 function CatalogItemsContainer({ collectionId, facetValueIds, items }) {
   const history = useHistory();
 
@@ -29,7 +31,11 @@ function CatalogItemsContainer({ collectionId, facetValueIds, items }) {
         data.collections.items.map((collection) => {
           return (
             <div key={collection.id}>
-              <h3 className="ml-24 h3 cat-font-left">{collection.name}</h3>
+              <div class="d-flex justify-content-between CN-categoryname">
+                <h3 className="ml-24 h3 cat-font-left">{collection.name}</h3>
+                <span className="CN-see-all">See All</span>
+                
+              </div>
               <CatalogItems
                 collectionId={collection.id}
                 take={4}

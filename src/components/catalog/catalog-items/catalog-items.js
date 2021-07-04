@@ -3,6 +3,7 @@ import ItemCard from "../../common/item-card/item-card";
 import "./catalog-items.css";
 import { useQuery } from "@apollo/client";
 import { GET_ITEMS } from "../../../queries/queries";
+import CNItemCard from "../../common/item-card/CNItemCard";
 
 // const produceData = [
 //   {
@@ -109,17 +110,14 @@ function CatalogItems(props) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :</p>;
   return (
-      <div className="cn-main-catalog-list">
-      <div className="catalog-items__container">
-
-      <div className="row">
+      <div className="row no-margin">
 
         {data.search.items.map((item, i) => {
           const price =
             item.priceWithTax.min || (item.priceWithTax.value / 100).toFixed(2);
           return (
-            <div className="col-md-3 col-sm-6">
-              <ItemCard
+            <div className="col-6 col-md-3 CN-main-card-row">
+              <CNItemCard
               key={i}
               title={item.productName}
               img={item.productAsset.preview}
@@ -131,13 +129,23 @@ function CatalogItems(props) {
                 showItem(item.productId);
               }}
             />
+              {/* <ItemCard
+              key={i}
+              title={item.productName}
+              img={item.productAsset.preview}
+              description={item.productName}
+              weight={item.productVariantPriceMeasurement}
+              price={price}
+              currencyCode={item.currencyCode}
+              showItem={() => {
+                showItem(item.productId);
+              }}
+            /> */}
           </div>
           );
         })}
 
         </div>
-      </div>
-      </div>
 
   );
 }

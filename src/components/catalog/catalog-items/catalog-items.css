@@ -15,12 +15,27 @@
     padding: 4px 0px;
     margin:  0px;
     text-align: left;
-    margin-left: 15px;
-  
+    font-family: DM Serif Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 29px;
+    line-height: 40px;
+    color: #15222F;
+
+
   }
   .catalog-items__container {
     display: block;
   
+  }
+
+
+
+  .CN-main-card-row{
+    margin: 0px;
+    padding: 0px;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
 }

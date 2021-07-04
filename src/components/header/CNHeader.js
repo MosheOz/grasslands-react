@@ -4,13 +4,16 @@ import PersonIcon from '../common/svg/person-icon/person-icon';
 import DeliveryTruckIcon from '../common/svg/delivery-truck-icon/delivery-truck-icon';
 import "./CNHeader.css";
 import SearchIcon from './loupe.png';
+import MenuIcon from './menu.png';
+import Filter2Icon from './filter.png';
 import FilterIcon from '../catalog/ResponsiveSidebarFilter/filter.png'
 import CloseIcon from '../catalog/ResponsiveSidebarFilter/close.png'
 
 import { GET_COLLECTIONS } from "../../queries/queries";
 import { useQuery } from "@apollo/client";
 import { FilterContext } from "../../context";
-import CatalogFilters from "../catalog/catalog-filters/catalog-filters";
+
+import CNSidebar from "./CNSidebar";
 
 
 const CNHeader = () => {
@@ -55,10 +58,14 @@ const CNHeader = () => {
 						<div className="col-5">
 							<div className="row">
 								<div className="col-8">
-									<input className="Cn-header__searchs" onChange={onSearchBox} />
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">
+									<img src={SearchIcon} className="Cn-search-icon" />
+									</span>
+								</div>
 								</div>
 								<div className="col-4">
-									<select className="form-control" onChange={updateFilters}>
+									<select className="form-control CN-category-list" onChange={updateFilters}>
 										<option >Categories</option>
 										{data.collections.items.map((col) => (
 											<option value={col.id} key={col.id}>
@@ -99,47 +106,66 @@ const CNHeader = () => {
 			{/* MOBILE */}
 			<header className="CN-mobile-header">
 				<div className="row">
-					<div className="col-5 col-sm-8 p-0">
+					<div className="col-5 col-sm-5 p-0">
+						<img onClick={toggleFilter} src={MenuIcon} className="CN-menu-icon" />
 						<span className="header__logo">Grasslands</span>
 					</div>
-					<div className="col-7 col-sm-4 justify-content-evenly d-flex  p-0">
-						<span className="header__language mx-3">עברית</span>
+					<div className="col-7 col-sm-7 text text-end p-0 d-flex justify-content-around">
+						{/* <span className="header__language mx-3">עברית</span> */}
 						<i className="header__truck-icon">
-							<DeliveryTruckIcon />
-						</i>
-						<i className="header__person-icon">
-							<PersonIcon />
+								<div className="CN-address-title">Deliver to Andri</div>
+								<div className="CN-address-title">244 5th Ave #2, Ne...</div>
+							{/* <DeliveryTruckIcon /> */}
 						</i>
 						<i className="header__basket-icon">
 							<BasketIcon />
 						</i>
 					</div>
+
+					<div className="clear"></div>
+
 				</div>
 			</header>
+
+			{/* SEARCH */}
 			<div className="row Cn-filter">
-				<div  className={showFilter ? 'show Cn-sidebar-filter col-6' : 'col-6  hide'}>
-					<CatalogFilters />
-					<img src={CloseIcon} className="Cn-Close-icons"  onClick={toggleFilter}/>
-				</div>
-				<div className="clear"></div>
-				<div className="col-9 col-md-7 offset-md-3 col-sm-10">
-					<select className="form-control Cn-cat-input" onChange={updateFilters}>
-						<option >Categories</option>
-						{data.collections.items.map((col) => (
-							<option value={col.id} key={col.id}>
-								{col.name}
-							</option>
-						))}
-					</select>
-				</div>
-				<div className='col-3  col-md-2 col-sm-2 p-0 d-flex align-items-center justify-content-around'>
 
-					<img src={SearchIcon} className="Cn-search-icon" />
-					<img src={FilterIcon} onClick={toggleFilter} className="Cn-search-icon" />
+				<div  className={showFilter ? 'show Cn-sidebar col-6' : 'col-6  hide'}>
+					<CNSidebar toggleFilter={toggleFilter} />
+					{/* <img src={CloseIcon} className="Cn-Close-icons"  onClick={toggleFilter}/> */}
+				</div>
+
+				<div class="input-group col-12">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">
+						<img src={SearchIcon} className="Cn-search-icon" />
+						</span>
+					</div>
+					<input type="text" class="form-control" placeholder="Search for product or farmer" className="Cn-header__searchs" onChange={onSearchBox} />
+				</div>
 				
+
+			</div>
+
+
+			{/* FILTERS */}
+
+			<div className="row">
+				<div class="col-12 text-center mt-30 CN-sidebar-display">
+					<span className="CN-filter-tags CN-filter-tags-active">
+						<img className="CN-filter-icon" src={Filter2Icon} />
+						<span>Filters</span>
+					</span>
+					<span className="CN-filter-tags">Sale</span>
+					<span className="CN-filter-tags">Local</span>
 				</div>
-
-
+			</div>
+			
+			
+			<div className="row">
+				<div class="col-12">
+					<div className="CN-border"></div>
+				</div>
 			</div>
 
 		</React.Fragment>

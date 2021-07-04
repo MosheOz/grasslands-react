@@ -1,1 +1,17 @@
-/* Media Queries  */
+.CN-see-all {
+    font-family: Barlow;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    color: #80BB34;
+    padding-top: 12px;
+}
+
+.CN-categoryname{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.no-margin{
+    margin: 0px;
+}
