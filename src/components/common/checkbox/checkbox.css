@@ -2,8 +2,8 @@
 .container {
   display: block;
   position: relative;
-  padding-left: 28px;
-  margin-bottom: 12px;
+  /* padding-left: 28px; */
+  /* margin-bottom: 12px; */
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -12,7 +12,7 @@
 }
 
 /* Hide the browser's default checkbox */
-.container input {
+.container input[type='checkbox'] {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -69,3 +69,16 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+@media (max-width: 320px){
+  .h6-regular{
+    font-size: 10px !important;
+  
+  }
+  .h6-medium{
+    font-size: 12px !important;
+  
+  }
+}
+
+

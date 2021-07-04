@@ -6,8 +6,11 @@ function ItemCard(props) {
   const { title, img, description, weight, price, showItem } = props;
 
   return (
-    <div onClick={showItem}>
-      <div className="item-card">
+    <>
+    
+    <div className="main_item_card" onClick={showItem}>
+      
+      <div className="item-card row">
         <div className="item-card__container">
           <div className="item-card__img-section">
             <img
@@ -28,13 +31,14 @@ function ItemCard(props) {
             <button className="green add-button h5-medium">
               <i>
                 <BasketIcon />
-              </i>{" "}
+              </i>
               Add
             </button>
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 }
 

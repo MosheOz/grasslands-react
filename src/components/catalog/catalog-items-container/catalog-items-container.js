@@ -1,5 +1,5 @@
 import React from "react";
-// import { filterContext } from "../../../context";
+// import { MyContext } from "../../../context";
 import { useHistory } from "react-router-dom";
 import CatalogItems from "../catalog-items/catalog-items";
 import { useQuery } from "@apollo/client";
@@ -29,7 +29,7 @@ function CatalogItemsContainer({ collectionId, facetValueIds, items }) {
         data.collections.items.map((collection) => {
           return (
             <div key={collection.id}>
-              <h3 className="ml-24 h3">{collection.name}</h3>
+              <h3 className="ml-24 h3 cat-font-left">{collection.name}</h3>
               <CatalogItems
                 collectionId={collection.id}
                 take={4}

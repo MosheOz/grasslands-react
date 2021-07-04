@@ -5,8 +5,10 @@ body {
   height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f5f7f9;
+  background: #f5f7f9 !important;
+  /* overflow-x: hidden !important; */
 }
+
 
 .h1 {
   font-family: DM Serif Display;
@@ -25,7 +27,7 @@ body {
 }
 
 .h3 {
-  font-family: DM Serif Display;
+  /* font-family: DM Serif Display; */
   font-style: normal;
   font-size: 29px;
   line-height: 40px;
@@ -128,6 +130,17 @@ body {
   color: #15222f;
   opacity: 0.64;
 }
+.Cn-h6-regular {
+  /* h6 regular */
+  font-family: Barlow;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  /* dark */
+
+  color: #15222f;
+  opacity: 0.64;
+}
 
 .h7-medium {
   font-family: Barlow;
@@ -189,3 +202,17 @@ body {
 .d-block {
   display: block;
 }
+
+
+
+.cn-ml-mr-0{
+  margin-right: none !important;
+  margin-left: none !important;
+}
+
+
+.clear{
+  clear: both;
+}
+
+

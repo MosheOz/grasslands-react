@@ -1,0 +1,24 @@
+.Cn-footer-background{
+    background-color: #15222f;
+    color: white;
+    padding: 30px;
+    padding-top: 90px;
+}
+.Cn-item-list{
+    color: #abafb4;
+    margin: 15px 0px;
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+    .Cn-footer-background{
+        padding: 0px 10px;
+    }
+    .Cn-footer{
+        padding-left: 0px;
+        padding-top: 30px;
+    }
+  }
+  

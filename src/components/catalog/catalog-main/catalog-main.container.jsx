@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useQuery } from "@apollo/client";
 
 import CatalogMain from "./catalog-main";
+import CNCatalog from "./CNCatalog";
 
 import { GET_ITEMS_WITH_FILTERS } from "../../../queries/queries";
 import { FilterContext } from "../../../context";
@@ -32,7 +33,8 @@ const CollectionsOverviewContainer = () => {
 
   const items = data.search.items;
 
-  return <CatalogMain filters={filters} items={items} />;
+  return <CNCatalog filters={filters} items={items} />;
+  // return <CatalogMain filters={filters} items={items} />;
 };
 
 export default CollectionsOverviewContainer;

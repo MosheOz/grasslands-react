@@ -1,8 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import App from "./App";
+// import App from "./App.bcp";
+
 import reportWebVitals from "./reportWebVitals";
+
+
+
+
 // import { ApolloClient, InMemoryCache } from "@apollo/client";
 // import { gql } from "@apollo/client";
 
@@ -33,7 +42,6 @@ import reportWebVitals from "./reportWebVitals";
 //           }
 //         }
 //       }
-//     `,
 //   })
 //   .then((result) => console.log(result));
 

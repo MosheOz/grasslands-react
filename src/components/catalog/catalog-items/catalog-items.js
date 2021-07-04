@@ -109,13 +109,17 @@ function CatalogItems(props) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :</p>;
   return (
-    <div>
+      <div className="cn-main-catalog-list">
       <div className="catalog-items__container">
+
+      <div className="row">
+
         {data.search.items.map((item, i) => {
           const price =
             item.priceWithTax.min || (item.priceWithTax.value / 100).toFixed(2);
           return (
-            <ItemCard 
+            <div className="col-md-3 col-sm-6">
+              <ItemCard
               key={i}
               title={item.productName}
               img={item.productAsset.preview}
@@ -123,12 +127,18 @@ function CatalogItems(props) {
               weight={item.productVariantPriceMeasurement}
               price={price}
               currencyCode={item.currencyCode}
-              showItem = {() => {showItem(item.productId)}}
+              showItem={() => {
+                showItem(item.productId);
+              }}
             />
+          </div>
           );
         })}
+
+        </div>
       </div>
-    </div>
+      </div>
+
   );
 }
 
