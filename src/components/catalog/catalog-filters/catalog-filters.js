@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 
 import "./catalog-filters.css";
 
@@ -6,7 +6,10 @@ import { FilterContext } from "../../../context";
 import CatalogCollectionsFilters from "../catalog-collections-filters/catalog-collections-filters";
 import CatalogSubFilters from "../catalog-sub-filters/catalog-sub-filters.component";
 
-function CatalogFilters({ filters }) {
+import { ReactComponent as RemoveIcon } from "../../../assets/cross.svg";
+import CatalogFiltersTags from "../catalog-filters-tags/catalog-filters-tags.component";
+
+const CatalogFilters = ({ filters, isResponsive, toggleDrawer }) => {
   const { searchState, setSearchState } = useContext(FilterContext);
 
   const { facetValueIds, collectionId } = searchState;
@@ -32,7 +35,7 @@ function CatalogFilters({ filters }) {
 
   const removeFacetsValues = (fv) => {
     const { __typename } = fv;
-		
+
     if (__typename === "FacetValue") {
       const facetValueId = fv.id;
       setSearchState({
@@ -52,7 +55,18 @@ function CatalogFilters({ filters }) {
 
   return (
     <div className="catalog-filters">
-      <div className="h4-medium catalog-filters__title">Filters</div>
+      {isResponsive ? (
+        <div>
+          <div className="h5-medium catalog-filters__title">
+            <span>Filters</span>
+            <RemoveIcon onClick={toggleDrawer("bottom", false)} />
+          </div>
+          <CatalogFiltersTags />
+        </div>
+      ) : (
+        <div className="h4-medium catalog-filters__title">Filters</div>
+      )}
+
       <CatalogCollectionsFilters
         updateFacetsValues={updateFacetsValues}
         removeFacetsValues={removeFacetsValues}
@@ -66,6 +80,6 @@ function CatalogFilters({ filters }) {
       />
     </div>
   );
-}
+};
 
 export default CatalogFilters;

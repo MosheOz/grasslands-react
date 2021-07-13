@@ -1,0 +1,46 @@
+.CFR {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  height: 100vh;
+}
+
+.CFR__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  align-content: center;
+  margin-bottom: 16px;
+}
+
+.CFR__title__left {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.CFR__title__right {
+  display: flex;
+  justify-content: flex-end;
+  align-content: stretch;
+  align-items: revert;
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+}
+
+.CFR__title__clear-all {
+  color: #80bb34;
+}
+
+.CFR__submit--button {
+  padding: 14px 16px 18px;
+  background: #80bb34;
+  border-radius: 16px;
+  border: none;
+  width: auto;
+  color: #ffffff;
+  margin: 12px 0px 24px 0;
+}

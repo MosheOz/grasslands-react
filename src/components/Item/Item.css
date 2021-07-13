@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 108px;
-  width: 1360px;
+  /* width: 1360px; */
 }
 
 .item__image-container--image {

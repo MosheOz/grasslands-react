@@ -1,13 +1,38 @@
 .app {
-  display: block;
-  /* flex-direction: column;
-  align-items: center;
-  justify-content: center; */
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 32px 40px 0px 40px;
 }
 
 .main {
-  display: flex;
-  justify-content: center;
-  padding: 0px 40px;
-  position: relative;
+  min-height: 100vh;
+}
+
+.footer-background {
+  display: none;
+  width: 100%;
+  height: 482px;
+  max-height: 482px;
+  position: absolute;
+  bottom: 0;
+  z-index: -100;
+}
+
+@media screen and (min-width: 1600px) {
+  .footer-background {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .app {
+    padding: 16px 16px 0px 16px;
+    max-width: 900px;
+  }
+
+  .footer-background {
+    padding: 56px 0px;
+    height: 314px;
+    max-height: 314px;
+  }
 }

@@ -4,3 +4,13 @@
   align-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 900px) {
+  .catalog-filters-tags--responsive-line {
+    display: block;
+    opacity: 0.08;
+    border: 1px dashed #15222f;
+    margin-top: 16px;
+    margin-bottom: 34px;
+  }
+}

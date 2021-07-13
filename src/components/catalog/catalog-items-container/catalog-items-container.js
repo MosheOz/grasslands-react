@@ -1,12 +1,16 @@
 import React from "react";
-// import { filterContext } from "../../../context";
 import { useHistory } from "react-router-dom";
 import CatalogItems from "../catalog-items/catalog-items";
 import { useQuery } from "@apollo/client";
 import { GET_COLLECTIONS } from "../../../queries/queries";
 import CatalogItemsFiltered from "../catalog-items-filtered/catalog-items-filtered.component";
 
-function CatalogItemsContainer({ collectionId, facetValueIds, items }) {
+function CatalogItemsContainer({
+  onSeeAllClicked,
+  collectionId,
+  facetValueIds,
+  items,
+}) {
   const history = useHistory();
 
   const showItem = (x) => {
@@ -16,6 +20,10 @@ function CatalogItemsContainer({ collectionId, facetValueIds, items }) {
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
+
+  const onSeeAll = (col) => {
+    onSeeAllClicked(col);
+  };
 
   return (
     <div>
@@ -28,8 +36,25 @@ function CatalogItemsContainer({ collectionId, facetValueIds, items }) {
       ) : (
         data.collections.items.map((collection) => {
           return (
-            <div key={collection.id}>
-              <h3 className="ml-24 h3">{collection.name}</h3>
+            <React.Fragment key={collection.id}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <h3 className="ml-24 h3">{collection.name}</h3>
+                <span
+                  className="h6-medium"
+                  style={{ color: "#80BB34", cursor: "pointer" }}
+                  onClick={() => {
+                    onSeeAll(collection);
+                  }}
+                >
+                  See All
+                </span>
+              </div>
               <CatalogItems
                 collectionId={collection.id}
                 take={4}
@@ -37,7 +62,7 @@ function CatalogItemsContainer({ collectionId, facetValueIds, items }) {
                 showItem={showItem}
                 key={collection.id}
               />
-            </div>
+            </React.Fragment>
           );
         })
       )}
