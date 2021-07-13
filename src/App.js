@@ -6,13 +6,10 @@ import Header from "./components/header/Header";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
 import Item from "./components/Item/Item";
-
-import PageA from "./components/TestPages/PageA";
-import PageB from "./components/TestPages/PageB";
-
-import "./App.css";
 import Footer from "./components/footer/footer";
 import CollectionsOverviewContainer from "./components/catalog/catalog-main/catalog-main.container";
+
+import "./App.css";
 
 import { FilterContextProvider } from "./context";
 const client = new ApolloClient({
@@ -29,25 +26,22 @@ function App() {
             <Header />
             <main className="main">
               <Switch>
-                <Route path="/PageA" exact component={PageA} />
-                <Route path="/PageB" exact component={PageB} />
                 <Route path="/Item" exact component={Item} />
                 <Route
                   path="/catalog"
                   exact
-                  // render={() => <CollectionsOverviewContainer />}
                   component={CollectionsOverviewContainer}
                 />
                 <Route
                   path="/"
                   exact
-                  // render={() => <CollectionsOverviewContainer />}
                   component={CollectionsOverviewContainer}
                 />
               </Switch>
             </main>
-            <Footer />
           </div>
+          <Footer />
+          <div className="footer-background dark"></div>
         </BrowserRouter>
       </ApolloProvider>
     </FilterContextProvider>

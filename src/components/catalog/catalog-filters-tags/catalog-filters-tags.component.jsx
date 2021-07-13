@@ -40,32 +40,36 @@ const CatalogFiltersTags = () => {
   };
 
   if (facetValueIds.length || collectionId !== null || term !== "") {
-    const combinedValues = [...facetValueIds, collectionId, term];
+    const combinedValues = [term, collectionId, ...facetValueIds];
 
     return combinedValues.length ? (
-      <div className="catalog-filters-tags">
-        {combinedValues.map((fv, i) => {
-          let name, typeName, id;
-          if (typeof fv === "object" && fv !== null) {
-            name = fv.name;
-            typeName = fv.__typename;
-            id = fv.id;
-          } else {
-            name = fv;
-            typeName = "search";
-          }
+      <React.Fragment>
+        <div className="catalog-filters-tags">
+          <span className="h6-medium">Filtering by:</span>
+          {combinedValues.map((fv, i) => {
+            let name, typeName, id;
+            if (typeof fv === "object" && fv !== null) {
+              name = fv.name;
+              typeName = fv.__typename;
+              id = fv.id;
+            } else {
+              name = fv;
+              typeName = "search";
+            }
 
-          return (
-            <FilterTag
-              removeFacetsValues={removeFacetsValues}
-              value={name}
-              typeName={typeName}
-              id={id}
-              key={i}
-            />
-          );
-        })}
-      </div>
+            return (
+              <FilterTag
+                removeFacetsValues={removeFacetsValues}
+                value={name}
+                typeName={typeName}
+                id={id}
+                key={i}
+              />
+            );
+          })}
+        </div>
+        <div className="catalog-filters-tags--responsive-line"></div>
+      </React.Fragment>
     ) : (
       ""
     );

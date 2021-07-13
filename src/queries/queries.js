@@ -34,6 +34,14 @@ const GET_COLLECTIONS = gql`
       items {
         id
         name
+        slug
+        featuredAsset {
+          id
+          width
+          height
+          name
+          preview
+        }
       }
     }
   }

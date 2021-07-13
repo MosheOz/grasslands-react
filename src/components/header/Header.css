@@ -1,36 +1,59 @@
 @import url("https://fonts.googleapis.com/css2?family=Assistant&display=swap");
 .header {
   display: flex;
-  margin: 32px 40px 0px 40px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.header-res {
+  display: none;
 }
 
 .header__logo {
+  width: 112px;
   font-family: DM Serif Display;
   font-weight: 600;
   font-size: 23px;
   line-height: 32px;
-
   color: #15222f;
+}
+
+.header-left-container {
+  width: 82%;
+  max-width: 1127px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__container-for-rest {
+  display: flex;
+  max-width: 1127px;
+}
+
+.header__search__select__container {
+  display: flex;
+  width: 58%;
+  max-width: 58%;
 }
 
 .header__search {
   display: flex;
   flex-direction: row;
   align-items: center;
-
   border: none;
-
   background: #ffffff;
-  /* shadow: popover */
-
   box-shadow: 0px 16px 32px rgba(29, 38, 102, 0.08);
   border-radius: 30px;
   height: 56px;
-  width: 427px;
   font-size: 23px;
-  margin-left: 121px;
+  width: 65%;
+  background-image: url("./search.png");
+  background-repeat: no-repeat;
+  padding: 0px 16px 0px 40px;
+  background-position: 16px;
 }
 
 .header__search:focus {
@@ -39,12 +62,20 @@
 
 .header__categories-dropdown {
   height: 56px;
-  width: 193px;
+  width: 35%;
+  max-width: 193px;
   left: 0px;
   top: 0px;
   border-radius: 16px;
   border: none;
   margin-left: 40px;
+  background: #ffffff;
+  /* opacity: 0.64; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  cursor: pointer;
 }
 
 .header__language {
@@ -58,14 +89,25 @@
 }
 
 .header__management {
-  margin-left: 83px;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  width: 35%;
+  max-width: 35%;
 }
 
 .header__delivery-address {
   display: flex;
-  margin-left: 40px;
+  /* margin-left: 40px; */
+  width: 320px;
+  align-content: center;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.HM__delivery-address {
+  display: flex;
+  align-items: center;
 }
 
 .header__truck-icon {
@@ -73,13 +115,30 @@
 }
 
 .header__person-icon {
-  margin-left: 40px;
+  /* margin-left: 40px; */
 }
 
 .header__basket-icon {
-  margin-left: 44px;
+  /* margin-left: 44px; */
 }
 
 .header__basket-icon svg path {
   stroke: #15222f;
+}
+
+@media screen and (max-width: 900px) {
+  .header {
+    display: none;
+  }
+
+  .header-res {
+    display: flex;
+    max-width: 900px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .header-res {
+    display: none;
+  }
 }

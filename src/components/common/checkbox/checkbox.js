@@ -8,6 +8,7 @@ function Checkbox({
   facetValue,
   isChecked,
 }) {
+  console.log("isChecked ", isChecked);
   const handleChange = (e) => {
     e.target.checked
       ? updateFacetsValues(facetValue)

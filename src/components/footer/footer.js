@@ -49,12 +49,15 @@ function Footer() {
             </span>
           </div>
         </div>
-      </div>
-      <div className="footer__last-div">
-        <span className="footer__middle-divs__title h5-medium">Need Help?</span>
-        <div className="h6-regular footer__customer-care-link">
-          <span>Visit customer care</span>
-          <i> </i>
+
+        <div className="footer__last-div">
+          <span className="footer__middle-divs__title h5-medium">
+            Need Help?
+          </span>
+          <div className="h6-regular footer__customer-care-link">
+            <span>Visit customer care</span>
+            <i> </i>
+          </div>
         </div>
       </div>
     </footer>

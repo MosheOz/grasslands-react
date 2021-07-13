@@ -8,6 +8,10 @@ body {
   background: #f5f7f9;
 }
 
+#root {
+  position: relative;
+}
+
 .h1 {
   font-family: DM Serif Display;
   font-style: normal;
@@ -48,6 +52,14 @@ body {
   color: #15222f;
 
   opacity: 0.8;
+}
+
+.h4-mobile {
+  font-family: DM Serif Display;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 32px;
+  color: #15222f;
 }
 
 .h4-light {
